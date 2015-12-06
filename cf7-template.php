@@ -8,21 +8,53 @@ Version: 1.0
 Author: averta
 Author URI: http://averta.net
 License: GPL2
-*/?>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#post-body-content').css ({'margin-bottom':'0px'});
-		$('#post-body-content').append('<div id="temp_div"><form><fieldset id="temp_fieldset"><legend id="temp_tittle">Template</legend><input list="temp_list"> <datalist id="temp_list"><option value="Contact Form"> <option value="Email Form"><option value="Support Form"> </datalist><button type="button" id="temp_button_get" class="temp_button">Action!</button></fieldset></form></div>');
-		$('#temp_fieldset').css({'border':'1px solid black','padding':'0 0 5px 5px'});
-		$('#temp_tittle').css ({'font-size':'18px','margin':'8px 0px','line-height':'24px','margin-left':'10px'});
-		$('.temp_button').css({'font-size':'12px','height':'26px','line-height':'24px','margin':'2px','padding':'0px 8px 1px'});
-		$('#temp_button_contact').click(function()
-		{
-			$('#wpcf7-form').html('hiiiii');
+*/
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
+define ( 'TEMP_URL' , plugins_url( '', __FILE__  ));
+
+add_action( 'admin_enqueue_scripts', 'avc7_enqueue_scripts' );
+function avc7_enqueue_scripts() {
+	wp_enqueue_script("jquery");
+	wp_enqueue_style ( 'style',TEMP_URL.'/style.css' );
+
+}
+
+
+add_action( 'admin_footer', 'avc7_temp_contact' );
+function avc7_temp_contact(){
+	$screen = get_current_screen();
+	if ($screen->id == 'toplevel_page_wpcf7') {
+		
+	
+    $avc7_template_content = '<div id="temp_div"><form><fieldset id="temp_fieldset"><legend id="temp_tittle">Template</legend><input id="temp_list_id" list="temp_list"> <datalist id="temp_list"><option value="Contact Form"> <option value="EmailForm"><option value="Support Form"> </datalist><button type="button" id="temp_button_get" class="temp_button" value="getaction">Action!</button></fieldset></form></div>';
+   }
+?>
+	<script type="text/javascript">
+	console.log(jQuery);
+	jQuery(document).ready(function($){
+		//bbbbb
+
+		$('#post-body-content').append('<?php echo $avc7_template_content; ?>');
+
+	    $("#temp_button_get").click(function() {
+	    	$('#temp_list').change(function(){
+	    		var val = $(this).val();
+	    		if (val === "EmailForm") {
+	    			$('#temp_button_get').hide();
+	    		}
+
+	    	});
+
+
 		});
 
 	});
 
 
 </script>
+<?php
+}
+?>
