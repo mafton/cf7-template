@@ -17,26 +17,37 @@ if ( ! defined( 'WPINC' ) ) {
 define ( 'TEMP_URL' , plugins_url( '', __FILE__  ));
 define ( 'TEMP_VER' , '1.0.0' ) ;
 
+
 add_action( 'admin_enqueue_scripts', 'avc7_enqueue_scripts' );
 function avc7_enqueue_scripts() {
 	wp_enqueue_script( "jquery" );
 	wp_enqueue_style ( 'style',TEMP_URL.'/admin/css/cf7-template-admin.css' );
-	wp_register_script( 'cf7-template-script', TEMP_URL.'/admin/js/cf7-template-admin.js');
-    wp_enqueue_script( 'cf7-template-admin-script', TEMP_URL.'/admin/js/cf7-template-admin.js');
-
+    wp_enqueue_script( 'cf7-template-admin-script', TEMP_URL.'/admin/js/cf7-template-admin.js',array(), '1.0.0', true);
 
 }
 
-add_action( 'admin_footer', 'avc7_temp_contact' );
-function avc7_temp_contact(){
+add_action( 'admin_footer', 'avc7_temp_admin_page' );
+function avc7_temp_admin_page(){
 
 	$screen = get_current_screen();
 	if ( $screen->id == 'toplevel_page_wpcf7' ) {
-		wp_enqueue_script( 'cf7-template-admin',TEMP_URL.'/admin/js/cf7-template-admin.js' );
-    $avc7_template_content = '<div id="temp_div"><form><fieldset id="temp_fieldset"><legend id="temp_tittle">Template</legend><input id="temp_list_id" list="temp_list"> <datalist id="temp_list"><option value="Contact Form"> <option value="Email Form" ><option value="Support Form"> </datalist><button type="button" id="temp_button_get" class="temp_button" value="getaction">Action!</button></fieldset></form></div>';
+    echo '<div id="temp_div"><form><fieldset id="temp_fieldset"><legend id="temp_tittle">Template</legend><select id="temp_list_id"><option value="Contact Form">Contact Form </option> <option value="Email Form" >Email Form</option> <option value="Support Form">Support Form </option></select><button type="button" id="temp_button_get" class="temp_button" value="getaction">Action!</button></fieldset></form></div>';
 
    } 
+}
 
+add_action( 'admin_footer', 'avc7_temp_generate' );
+function avc7_temp_generate (){
+
+	$screen = get_current_screen();
+	if ( $screen->id == 'toplevel_page_wpcf7' ) {
+ 	   wp_localize_script ( 'cf7-template-admin-script', 'avc7' , $daynamic_genertae = array( 'cf1' => __('something','avc7_domain')));
+
+ 	   if (has_filter( '$avc1_generate_filter' )){ 
+ 	   	$avcf_new_input =  apply_filters( $avc1_generate_filter, $avcf_new_input );
+ 	   array_push($daynamic_genertae , $avcf_new_input);
+ 	   }
+ 	}   
 }
 
 

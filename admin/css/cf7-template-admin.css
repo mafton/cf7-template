@@ -1,3 +1,12 @@
+#temp_list_id{
+	border-color: 2px solid black;
+	font-size : 12px ;
+	height : 26px ;
+	line-height : 24px ;
+	margin : 0px ;
+	padding : 0px 8px 1px ;
+}
+
 #temp_fieldset {
 	border : 1px solid black;
 	padding : 0 0 5px 5px;
@@ -15,9 +24,9 @@
 }
 
 .temp_button {
-font-size : 12px ;
-height : 26px ;
-line-height : 24px ;
-margin : 2px ;
-padding : 0px 8px 1px ;
+	font-size : 12px ;
+	height : 26px ;
+	line-height : 24px ;
+	margin : 2px ;
+	padding : 0px 8px 1px ;
 }
