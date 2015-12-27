@@ -11,28 +11,42 @@ License: GPL2
 
     jQuery(document).ready(function($){
 		//bbbbb
-		var avc7_content = {emailform :'<p>Your Name (required)<br />[text* your-name]</p>', contactform : avc7.cf1 , supportform: 'heeey'};
-			 $('#post-body-content').append($('#temp_div'));
-		    $('#temp_button_get').click(function() {
-		    			    			    		
-		    	var ef = $('#temp_list_id').val();
-		    	console.log (avc7.cf1);
-		    	if (ef === "Email Form"){
 
-		    		$('#wpcf7-form').append(avc7_content.emailform);
-		    		
-		    	} else if (ef === "Contact Form"){
-		    	   
-		    		 $('#wpcf7-form').append(avc7_content.contactform);
+		var avcf_label  = { avcf_lbl  : avcf.avcf_label };
+		var avcf_frm    = { tmpfrm    : avcf.avcf_form  };
+		var avcf_mail   = { emailform : avcf.avcf_mail  };
+		  
+		   //  avcf_frm.push ('avc7.avcf_new_input');
 
-		    	} else if   (ef === "Support Form"){
-		    		
-		    		$('#wpcf7-form').append(avc7_content.supportform);	
-		    	}
-		    	
-			});
-	
+			$('#post-body-content').append($('#temp_div'));
+			  $('#temp_list_id').append( "<option value='avcf_label.avcf_lbl'> "+ avcf_label.avcf_lbl + "<option>");
+			    $('#temp_button_get').click(function() {
+			      if (confirm ('Do you want to do this action?')){ 	
+			    	$('#wpcf7-form').empty();
+			    	$('#wpcf7-mail-body').empty();		    			    		
+			    	var ef = $('#temp_list_id').val();
+			    	console.log (avcf.args);
+			    	if (ef === "Email Form"){
 
+			    		$('#wpcf7-form').append(avcf.avcf_label);
+			    		
+			    	} else if (ef === "Contact Form"){
+			    	   
+			    		 $('#wpcf7-form').append(avcf_frm.contactform);
+
+			    	} else if   (ef === "Support Form"){
+			    		
+			    		$('#wpcf7-form').append(avcf_frm.supportform);
+
+			    	} else if ( ef === "avcf_label.avcf_lbl"){
+
+			    		$('#wpcf7-form').append( avcf_frm.tmpfrm );
+			    		$('#wpcf7-mail-body').append( avcf_mail.emailform );
+			    		console.log ( avcf_frm.tmpfrm);
+			    	}
+			    }	
+			    	
+				});
 	});
 
 

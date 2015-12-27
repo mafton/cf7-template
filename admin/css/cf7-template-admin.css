@@ -1,9 +1,8 @@
 #temp_list_id{
-	border-color: 2px solid black;
 	font-size : 12px ;
 	height : 26px ;
 	line-height : 24px ;
-	margin : 0px ;
+	margin-top:  : 0px ;
 	padding : 0px 8px 1px ;
 }
 
@@ -27,6 +26,6 @@
 	font-size : 12px ;
 	height : 26px ;
 	line-height : 24px ;
-	margin : 2px ;
+	margin-left : 4px ;
 	padding : 0px 8px 1px ;
 }

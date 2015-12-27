@@ -26,6 +26,7 @@ function avc7_enqueue_scripts() {
 
 }
 
+
 add_action( 'admin_footer', 'avc7_temp_admin_page' );
 function avc7_temp_admin_page(){
 
@@ -41,12 +42,15 @@ function avc7_temp_generate (){
 
 	$screen = get_current_screen();
 	if ( $screen->id == 'toplevel_page_wpcf7' ) {
- 	   wp_localize_script ( 'cf7-template-admin-script', 'avc7' , $daynamic_genertae = array( 'cf1' => __('something','avc7_domain')));
 
- 	   if (has_filter( '$avc1_generate_filter' )){ 
- 	   	$avcf_new_input =  apply_filters( $avc1_generate_filter, $avcf_new_input );
- 	   array_push($daynamic_genertae , $avcf_new_input);
- 	   }
+    wp_localize_script('cf7-template-admin-script' , 'avcf' , $args = apply_filters( 'avc1_generate_filter',  
+    	         array( 
+    	         	    'avcf_label' =>  'qqqqqqqqqq',
+						'avcf_form'  =>  'qqqqqqqqqq',
+						'avcf_mail'  =>  'qqqqqqqqqq'
+						)
+	 	   		 ));
+    echo json_encode($args, JSON_FORCE_OBJECT);
  	}   
 }
 
